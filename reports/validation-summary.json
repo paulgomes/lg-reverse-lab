@@ -1,0 +1,46 @@
+{
+  "scope": "Sanitized summary of local bounded tests. Full ROM, runtime, private hardware reports and raw captures are not distributed.",
+  "candidate_sha256": "c5183ed34966bee321abaccd14f26d3236fcff20166dd97a54e94380cbfa86e1",
+  "hardware_validated": false,
+  "MCU_cases_executed": 98,
+  "ARM_checks": 29,
+  "ARM_scenarios": 14,
+  "media_categories": 7,
+  "MTG_resource_count": 403,
+  "fonts": 15,
+  "guarded_font0_glyphs": 434,
+  "window": [
+    720,
+    458
+  ],
+  "native_display_commit_test_modes": [
+    0,
+    1
+  ],
+  "gates": [
+    {
+      "gate": "MCU",
+      "original_local_report_sha256": "db4507eed9115f476cc367515b3f10f8425a0707ded763f0f8adc78ce04ce58b",
+      "all_passed": true,
+      "candidate_sha256": "c5183ed34966bee321abaccd14f26d3236fcff20166dd97a54e94380cbfa86e1"
+    },
+    {
+      "gate": "ARM",
+      "original_local_report_sha256": "651f4359769f5281a99d88bc613db5f5d1ebe7209b492bd9af36ec7ff08261b2",
+      "all_passed": true,
+      "candidate_sha256": "c5183ed34966bee321abaccd14f26d3236fcff20166dd97a54e94380cbfa86e1"
+    },
+    {
+      "gate": "Independent reconstruction",
+      "original_local_report_sha256": "27a74da3b07df6f18bd7d7b27aafb2fe03ed6f1315437e0cd02a5ddc2433c503",
+      "all_passed": true,
+      "candidate_sha256": "c5183ed34966bee321abaccd14f26d3236fcff20166dd97a54e94380cbfa86e1"
+    }
+  ],
+  "limits": [
+    "CPU tests use explicit peripheral and media fixtures, not live LG peripherals.",
+    "MMIO commit tests are not physical scanout or color/timing measurements.",
+    "Prior f1 candidate had black USB and updater screens on hardware; this candidate needs a new physical test.",
+    "Opening is a static MPEG picture. No GIF decoder or animated USB entry is implemented."
+  ]
+}

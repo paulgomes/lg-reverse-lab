@@ -1,0 +1,49 @@
+import json
+import tempfile
+import unittest
+from pathlib import Path
+import sys
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
+import lg_scout as x
+
+class ScoutTests(unittest.TestCase):
+    def test_original_media_and_no_updates(self):
+        media=x.verify_media()
+        self.assertEqual(len(media),5)
+        self.assertEqual(sum(i['file'].endswith('.mp3') for i in media),3)
+        self.assertTrue(all(Path(i['file']).suffix.lower() not in x.BANNED_UPDATE_EXT for i in media))
+
+    def test_compare(self):
+        a={'files':[{'path':'a.mp3','size':10,'sha256':'1'}, {'path':'r.jpg','size':5}]}
+        b={'files':[{'path':'a.mp3','size':10,'sha256':'2'}, {'path':'new.mp3','size':2}]}
+        result=x.compare(a,b)
+        self.assertEqual(result['new'][0]['path'],'new.mp3')
+        self.assertEqual(result['removed'][0]['path'],'r.jpg')
+        self.assertEqual(result['modified'][0]['before']['path'],'a.mp3')
+
+    def test_full_cycle_temp_usb(self):
+        orig=(x.BASE,x.LAB,x.SESSIONS,x.ACTIVE,x.TESTS)
+        with tempfile.TemporaryDirectory() as t:
+            root=Path(t)
+            x.BASE=root; x.LAB=root/'LG_LAB_DADOS'; x.SESSIONS=x.LAB/'sessoes'; x.ACTIVE=x.LAB/'sessao_ativa.txt'; x.TESTS=root/'LG_TESTES'
+            x.TESTS.mkdir()
+            for p in Path(orig[-1]).iterdir():
+                (x.TESTS/p.name).write_bytes(p.read_bytes())
+            x.new_session()
+            a=x.take_snapshot('antes')
+            (root/'LG_GRAVACAO.mp3').write_bytes(b'arquivo de teste - simulado, NAO gerado pelo LG')
+            b=x.take_snapshot('depois')
+            diff=x.read_json(x.current_session()/'diferencas.json')
+            self.assertEqual([n['path'] for n in diff['new']],['LG_GRAVACAO.mp3'])
+            x.add_observation('USB - gravacao','gravou','sem som', 'apenas simulacao de teste unitario')
+            z=x.export_bundle()
+            with __import__('zipfile').ZipFile(z) as f:
+                self.assertTrue(any(name.endswith('RESUMO_PARA_CHATGPT.json') for name in f.namelist()))
+                self.assertTrue(any(name.endswith('observacoes.jsonl') for name in f.namelist()))
+                self.assertFalse(any(name.endswith('.rom') for name in f.namelist()))
+            self.assertGreater(len(a['files']),0)
+            self.assertGreater(len(b['files']),0)
+        x.BASE,x.LAB,x.SESSIONS,x.ACTIVE,x.TESTS=orig
+
+if __name__=='__main__':
+    unittest.main()

@@ -1,0 +1,32 @@
+{
+  "updated": "2026-10-23",
+  "target": "LG HT306SU-A2",
+  "original_sha256": "27adf86b93e5e7347fbd7d12837e32a3394243a75e025d2b188e1afd5151c00a",
+  "candidate_sha256": "c5183ed34966bee321abaccd14f26d3236fcff20166dd97a54e94380cbfa86e1",
+  "candidate_status": "PC_VERIFIED_PHYSICAL_TEST_PENDING",
+  "last_user_report_associated_sha256": "f1c0a95eccb76a77ad52818f1fda1085f68dd34328c0e166a2bf66d2984d8fce",
+  "last_user_report": {
+    "boot_static_visible": true,
+    "USB_menu_visible": false,
+    "updater_visible": false,
+    "audio_normal": true,
+    "installed_flash_identity_measured": false
+  },
+  "current_changes": [
+    "Native 720x458 window and original palette.",
+    "Direct native USB show path without waiting for a custom animation.",
+    "Clara composition with inline native MTG drawing.",
+    "434 guarded positive-RLE glyphs retaining prior visible glyph pixels."
+  ],
+  "preserved": [
+    "ARM/DSP code and MPEG boot picture",
+    "Six sampled WYS idle frames"
+  ],
+  "not_implemented": [
+    "GIF decoder",
+    "Animated startup",
+    "Animated USB loading cover",
+    "Native HTML, touch interaction or iOS blur"
+  ],
+  "next_step": "Physical visibility test with visible updater instructions; never blind PLAY."
+}

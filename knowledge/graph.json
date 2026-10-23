@@ -1,0 +1,122 @@
+{
+  "description": "Public technical summary; private session context and raw evidence are excluded.",
+  "nodes": [
+    {
+      "id": "target",
+      "label": "LG HT306SU-A2",
+      "level": "research_target"
+    },
+    {
+      "id": "stock",
+      "label": "Exact source firmware SHA-256 27adf86b93e5…",
+      "level": "file_verified"
+    },
+    {
+      "id": "mcu",
+      "label": "Banked 8051 MCU producer",
+      "level": "reverse_engineered"
+    },
+    {
+      "id": "arm",
+      "label": "ARM/Thumb OSD consumer",
+      "level": "reverse_engineered"
+    },
+    {
+      "id": "resource",
+      "label": "Native MTG graphics and indexed palettes",
+      "level": "reverse_engineered"
+    },
+    {
+      "id": "text",
+      "label": "25 language tables with 542 records each",
+      "level": "file_verified"
+    },
+    {
+      "id": "font",
+      "label": "15 native fonts; 434 guarded font0 glyphs in candidate",
+      "level": "cpu_verified"
+    },
+    {
+      "id": "commit",
+      "label": "Native display commit tested in video modes 0 and 1",
+      "level": "cpu_verified"
+    },
+    {
+      "id": "clara",
+      "label": "Clara native458 candidate c5183ed34966",
+      "level": "cpu_verified"
+    },
+    {
+      "id": "physical_f1",
+      "label": "Prior f1: black USB/updater, static opening visible and audio normal",
+      "level": "hardware_reported"
+    },
+    {
+      "id": "opening",
+      "label": "Static MPEG opening; no GIF decoder",
+      "level": "reverse_engineered"
+    },
+    {
+      "id": "pending",
+      "label": "Physical display validation for c518 remains pending",
+      "level": "unverified"
+    }
+  ],
+  "edges": [
+    {
+      "from": "target",
+      "relation": "uses",
+      "to": "stock"
+    },
+    {
+      "from": "stock",
+      "relation": "contains",
+      "to": "mcu"
+    },
+    {
+      "from": "stock",
+      "relation": "contains",
+      "to": "arm"
+    },
+    {
+      "from": "arm",
+      "relation": "draws",
+      "to": "resource"
+    },
+    {
+      "from": "arm",
+      "relation": "reads",
+      "to": "text"
+    },
+    {
+      "from": "resource",
+      "relation": "contains",
+      "to": "font"
+    },
+    {
+      "from": "clara",
+      "relation": "uses",
+      "to": "resource"
+    },
+    {
+      "from": "clara",
+      "relation": "tested_with",
+      "to": "commit"
+    },
+    {
+      "from": "physical_f1",
+      "relation": "motivates_correction",
+      "to": "clara"
+    },
+    {
+      "from": "clara",
+      "relation": "preserves",
+      "to": "opening"
+    },
+    {
+      "from": "clara",
+      "relation": "requires",
+      "to": "pending"
+    }
+  ]
+}
