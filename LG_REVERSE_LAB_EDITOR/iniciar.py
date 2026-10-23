@@ -31,12 +31,12 @@ def main():
             if ready():
                 break
             if process.poll() is not None:
-                raise RuntimeError('O editor não iniciou. Consulte server.log nesta pasta.')
+                raise RuntimeError('The editor did not start. Check server.log in this directory.')
             time.sleep(0.2)
         else:
-            raise RuntimeError('O editor demorou para iniciar. Consulte server.log nesta pasta.')
+            raise RuntimeError('The editor timed out while starting. Check server.log in this directory.')
     webbrowser.open(URL)
-    print('Editor aberto: ' + URL)
+    print('Editor opened: ' + URL)
 
 
 if __name__ == '__main__':

@@ -22,9 +22,9 @@ def generate(output: Path) -> None:
     ffmpeg = shutil.which('ffmpeg')
     if not ffmpeg:
         raise RuntimeError('ffmpeg was not found on PATH.')
-    names = ['01_TESTE_ESQUERDO.mp3', '02_TESTE_DIREITO.mp3',
-             '03_TESTE_ESTEREO_ALTERNADO.mp3', '04_TESTE_IMAGEM_1.jpg',
-             '05_TESTE_IMAGEM_2.jpg']
+    names = ['01_LEFT_CHANNEL.mp3', '02_RIGHT_CHANNEL.mp3',
+             '03_ALTERNATING_CHANNELS.mp3', '04_COLOR_BARS.jpg',
+             '05_COLOR_GRID.jpg']
     if any((output / name).exists() for name in names):
         raise FileExistsError('A test-media destination already exists; choose a new folder.')
     output.mkdir(parents=True, exist_ok=True)
@@ -58,8 +58,8 @@ def generate(output: Path) -> None:
         if index:
             for x in range(40, 1230, 20):
                 draw.line((x, 200, x, 550), fill='#222222', width=2)
-        draw.text((40, 55), f'LG Reverse Lab | USB Scout | Teste {index + 1}', fill='white', font=font)
-        draw.text((40, 625), 'Midia sintetica gerada por codigo. Sem fotos pessoais.', fill='white', font=font)
+        draw.text((40, 55), f'LG Reverse Lab | USB Scout | Test {index + 1}', fill='white', font=font)
+        draw.text((40, 625), 'Synthetic media generated from code. No personal photos.', fill='white', font=font)
         image.save(output / name, quality=90, exif=b'')
 
 

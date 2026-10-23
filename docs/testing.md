@@ -1,23 +1,23 @@
-# Testes, evidência e limites
+# Testing, evidence, and limitations
 
-Há dois conjuntos diferentes: os testes executáveis publicados com as ferramentas e as verificações nativas realizadas durante a pesquisa do firmware. Os primeiros podem rodar em uma cópia limpa deste repositório; os segundos dependem de artefatos locais não distribuídos aqui.
+There are two separate sets: the executable tests published with the tools and the native checks performed during firmware research. The former run in a clean copy of this repository; the latter depend on local artifacts not distributed here.
 
-## Testes públicos sem ROM ou aparelho
+## Public tests without a ROM or device
 
-Na raiz do repositório, com Python 3.11 ou superior:
+From the repository root, with Python 3.11 or later:
 
 ```sh
 python -m unittest discover -s tests -p "test_*.py" -v
 python -m unittest discover -s USB_SCOUT/tests -p "test_scout.py" -v
 ```
 
-O conjunto de patch usa imagens sintéticas para verificar reversibilidade, rejeição de entrada incompatível, hashes, dados comprimidos inválidos e recusa de sobrescrita. Também confere o delta publicado e sua marcação experimental. Isso não equivale a executar o firmware.
+The patch tests use synthetic images to check reversibility, incompatible input rejection, hashes, invalid compressed data, and refusal to overwrite. They also check the published delta and its experimental status. This is not equivalent to executing the firmware.
 
-Os testes não gráficos do Scout verificam inventários, comparação, sessões e exportação usando dados temporários. A seleção `test_scout.py` evita abrir uma janela Tk durante a execução automatizada. Dados simulados desses testes não são observações do LG.
+Scout's non-graphical tests check inventories, comparisons, sessions, and exports using temporary data. Selecting `test_scout.py` avoids opening a Tk window during automated execution. Simulated data from these tests is not an observation of the LG.
 
-## Testes opcionais com a fonte original
+## Optional tests with the original source
 
-Forneça localmente a ROM original com o SHA-256 documentado no README e gere os catálogos:
+Supply the original ROM locally with the SHA-256 documented in the README, then generate the catalogs:
 
 ```sh
 python tools/prepare_catalogs.py --rom LG_HT306LD1_1107200.rom
@@ -25,28 +25,28 @@ python tools/prepare_catalogs.py --rom LG_HT306LD1_1107200.rom --check
 python -m unittest discover -s LG_REVERSE_LAB_EDITOR -p "test_engine.py" -v
 ```
 
-Esses testes conferem o motor de textos contra a imagem original, incluindo alterações concretas, checksum, limites e restauração. Não constituem um teste visual do candidato Clara completo. A ROM e os catálogos derivados ficam locais.
+These tests check the text engine against the original image, including concrete edits, checksums, bounds, and restoration. They are not a visual test of the complete Clara candidate. The ROM and derived catalogs remain local.
 
-Para experimentar a interface gráfica do Scout, é necessário um ambiente com Tkinter e uma sessão gráfica. A função de verificação de mídias usa os cinco arquivos sintéticos incluídos em `USB_SCOUT/LG_TESTES`: três MP3 e dois JPEG. Eles podem ser regenerados com `tools/generate_test_media.py`, FFmpeg e Pillow; não são mídias pessoais de pesquisa.
+Trying Scout's graphical interface requires an environment with Tkinter and a graphical session. The media verification feature uses the five synthetic files included in `USB_SCOUT/LG_TESTES`: three MP3s and two JPEGs. They can be regenerated with `tools/generate_test_media.py`, FFmpeg, and Pillow; they are not personal research media.
 
-## Verificações do candidato native458
+## Native458 candidate checks
 
-O candidato de destino `c5183ed34966bee321abaccd14f26d3236fcff20166dd97a54e94380cbfa86e1` passou, no ambiente de pesquisa, por **98 casos MCU, 29 verificações ARM, revisão independente e conferência da cópia USB por releitura**. O [resumo público de validação](../reports/validation-summary.json) registra esses resultados. O conjunto completo de emulação, ROMs e relatórios privados não faz parte deste pacote público; os comandos de testes acima não reproduzem esse conjunto de validação nativa.
+In the research environment, target candidate `c5183ed34966bee321abaccd14f26d3236fcff20166dd97a54e94380cbfa86e1` passed **98 MCU cases, 29 ARM checks, independent review, and USB copy verification by readback**. The [public validation summary](../reports/validation-summary.json) records these results. The full emulation setup, ROMs, and private reports are not part of this public package; the test commands above do not reproduce this native validation suite.
 
-A revisão incluiu preservação das regiões declaradas, reconstrução e inversão do patch, limites de recursos, comandos de desenho e execução do commit nativo de exibição em dois modos de vídeo. Recursos com problemas encontrados durante a preparação foram corrigidos ou rejeitados antes da cópia do candidato.
+The review included preservation of declared regions, patch reconstruction and reversal, resource bounds, drawing commands, and execution of the native display commit in two video modes. Resource problems found during preparation were corrected or rejected before copying the candidate.
 
-## O que esses resultados não comprovam
+## What these results do not establish
 
-- Uma janela na lista lógica de visibilidade não é prova de saída de vídeo. A revisão passou a incluir o commit nativo `204AE` e suas escritas de MMIO, mas isso ainda ocorre no computador.
-- PNGs de prévia não medem as cores do aparelho. A paleta representada e a composição de uma cena podem ser estimadas.
-- Um checksum válido e o SHA-256 esperado provam identidade e consistência do arquivo, não compatibilidade física, possibilidade de recuperação ou funcionamento de todos os estados.
-- A releitura do pendrive não confirma a memória flash instalada nem significa que o agente realizou a atualização no LG.
-- A animação da tela de descanso não implica suporte a GIF na abertura ou durante a leitura do USB.
+- A window in the logical visibility list is not proof of video output. The review now includes native commit `204AE` and its MMIO writes, but this still runs on a computer.
+- Preview PNGs do not measure device colors. The represented palette and scene composition may be estimated.
+- A valid checksum and the expected SHA-256 establish file identity and consistency, not physical compatibility, recoverability, or operation in every state.
+- Reading back the USB drive does not confirm installed flash contents or mean that the agent updated the LG.
+- Screensaver animation does not imply GIF support at startup or during USB reading.
 
-O teste físico mais recente do firmware anterior teve USB e atualizador pretos, com áudio normal. O candidato corretivo continua aguardando uma nova observação do aparelho. Consulte [Estado dos testes no aparelho](hardware-status.md).
+The most recent physical test of the previous firmware had black USB and updater screens, with normal audio. The corrective candidate is still awaiting a new observation of the device. See [Hardware test status](hardware-status.md).
 
-## Como relatar um resultado
+## Reporting a result
 
-Informe o hash do arquivo usado, modelo do aparelho, tipo de cabo, modo de vídeo quando conhecido, passos reproduzíveis e comportamento observado. Distinga imagem no PC, cópia de arquivo no USB, atualização realizada e imagem observada na TV. Não publique dumps, manuais, catálogos completos ou fotos pessoais como anexos de um relato sem revisar seu conteúdo e sua distribuição.
+Provide the hash of the file used, device model, cable type, video mode when known, reproducible steps, and observed behavior. Distinguish the PC picture, USB file copy, completed update, and picture observed on the TV. Do not attach dumps, manuals, complete catalogs, or personal photos to a report without reviewing their contents and distribution.
 
-Se as instruções de atualização não estiverem visíveis, pare a tentativa de gravação. Não use uma sequência de PLAY ou retirada do USB por memória de tempo.
+If update instructions are not visible, stop the flashing attempt. Do not use a PLAY or USB removal sequence based on memorized timing.

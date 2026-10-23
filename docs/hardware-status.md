@@ -1,40 +1,40 @@
-# Estado dos testes no aparelho
+# Hardware test status
 
-**O candidato Clara native458 `c5183ed34966…` ainda não tem confirmação física de imagem no LG.** Passar nos testes do computador e conferir uma cópia no pendrive são etapas distintas de instalar e observar o resultado na TV.
+**The Clara native458 candidate `c5183ed34966…` does not yet have physical confirmation of a visible picture on the LG.** Passing computer tests and verifying a USB copy are separate from installing the image and observing the result on the TV.
 
-## Evidência disponível
+## Available evidence
 
-| Imagem | Origem da evidência | Resultado e limite |
+| Image | Evidence source | Result and limitation |
 | --- | --- | --- |
-| Modificações iniciais de textos e recursos | Relatos e fotos do usuário | Textos alterados e identidade visual apareceram no aparelho; áudio, pausa, retomada, volume e Ajustes foram relatados como funcionais nas etapas correspondentes. Isso não valida versões posteriores. |
-| `757ee81bad98…` | Teste físico anterior associado a essa imagem | USB visível, com layout inadequado; imagem WYS durante a leitura continuava estática. |
-| `f1c0a95eccb7…` | Relato físico mais recente | Abertura WYS CORP estática visível, menu USB e atualizador pretos, música normal. O usuário relatou ter atualizado sem imagem pelo tempo memorizado; essa ação não deve ser repetida como procedimento. |
-| `c5183ed34966…` | Testes nativos no computador, revisão independente e releitura da cópia USB | Verificações aprovadas; **teste físico da correção pendente**. |
+| Initial text and resource modifications | User reports and photos | Changed text and visual identity appeared on the device; audio, pause, resume, volume, and Settings were reported working at the corresponding stages. This does not validate later versions. |
+| `757ee81bad98…` | Earlier physical test associated with this image | USB menu visible, with an unsuitable layout; the WYS image during reading remained static. |
+| `f1c0a95eccb7…` | Most recent physical report | Static WYS CORP opening visible, USB menu and updater black, music normal. The user reported updating without a picture using memorized timing; this must not be repeated as a procedure. |
+| `c5183ed34966…` | Native computer tests, independent review, and USB copy readback | Checks passed; **physical test of the correction pending**. |
 
-O hash do arquivo enviado ao pendrive não é uma leitura do chip do LG. A associação entre uma imagem e um relato físico não deve ser apresentada como confirmação do hash instalado.
+The hash of the file copied to USB is not a readout of the LG's flash chip. An association between an image and a physical report must not be presented as confirmation of the installed hash.
 
-## Identidade da correção
+## Corrective candidate identity
 
 ```text
-Fonte original:
+Original source:
 27adf86b93e5e7347fbd7d12837e32a3394243a75e025d2b188e1afd5151c00a
 
-Candidato Clara native458:
+Clara native458 candidate:
 c5183ed34966bee321abaccd14f26d3236fcff20166dd97a54e94380cbfa86e1
 
-Tamanho de cada imagem: 2.091.376 bytes
+Size of each image: 2,091,376 bytes
 ```
 
-A correção restaura os contratos nativos de janela, paleta e exibição do USB, preservando o desenho Clara. Ela remove a espera pela animação experimental para tornar o menu visível. Não foi demonstrado que esse mecanismo era a única causa do defeito físico.
+The correction restores the native window, palette, and USB display contracts while preserving the Clara design. It removes the wait for the experimental animation before making the menu visible. This mechanism has not been shown to be the only cause of the physical defect.
 
-## Abertura e animação
+## Opening and animation
 
-A abertura é uma imagem MPEG estática. O candidato não reproduz um arquivo GIF na inicialização nem inicia uma animação durante o reconhecimento do USB. Os seis quadros WYS da tela de descanso foram preservados, mas isso não comprova que a sequência completa funcionará em todos os estados do aparelho.
+The opening is a static MPEG image. The candidate does not play a GIF at startup or start an animation during USB detection. The six WYS screensaver frames were preserved, but this does not prove that the entire sequence will work in every device state.
 
-## Próxima evidência necessária
+## Next evidence needed
 
-O usuário informou conexão por vídeo componente YPbPr. Um diagnóstico possível, **fora de qualquer atualização e sem pendrive**, é testar VIDEO OUT amarelo em uma entrada AV compatível e verificar se Ajustes reaparece. Essa alternativa não foi confirmada e não garante recuperar a imagem.
+The user reported a YPbPr component video connection. One possible diagnostic step, **outside any update and without a USB drive**, is to test the yellow VIDEO OUT with a compatible AV input and check whether Settings becomes visible. This alternative has not been confirmed and does not guarantee picture recovery.
 
-Antes de qualquer nova gravação, as instruções de atualização precisam estar visíveis. **Se o atualizador ficar preto, não retirar o USB nem pressionar PLAY com base em tempo memorizado.** Este repositório não fornece uma sequência de atualização às cegas.
+Before any further flashing, update instructions must be visible. **If the updater is black, do not remove the USB drive or press PLAY based on memorized timing.** This repository does not provide a blind update sequence.
 
-Uma validação futura deve registrar o arquivo utilizado, o cabo e modo de vídeo, abertura, USB parado e tocando, seleção de itens, fila, Ajustes, pausa/retomada, volume e tela do atualizador. Fotos ou vídeos devem excluir informações pessoais antes de serem publicados.
+Future validation should record the file used, cable and video mode, opening, USB while stopped and playing, item selection, queue, Settings, pause/resume, volume, and updater screen. Remove personal information from photos or videos before publication.

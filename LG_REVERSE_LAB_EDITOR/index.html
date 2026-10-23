@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#142b30">
-  <title>LG Reverse Lab — Editor de interface</title>
+  <title>LG Reverse Lab — Interface editor</title>
   <style>
     :root{--bg:#f3f4f0;--surface:#fff;--ink:#172e32;--muted:#657579;--line:#dde4df;--soft:#edf2ee;--green:#173d37;--accent:#dcf174;--focus:#307a67;--amber:#8a641d;--error:#9c3838;--radius:18px;--shadow:0 6px 28px #183d3111;font-family:Inter,"Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--bg);font-synthesis:none}
     *{box-sizing:border-box}body{margin:0}button,input,select,textarea{font:inherit}button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.45}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #79aa93;outline-offset:3px}button{border:0}a{color:#2b6958}button,textarea,input,select{transition:border-color .16s,background .16s,box-shadow .16s}svg{flex-shrink:0}button svg{pointer-events:none}.sr-only{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
@@ -21,38 +21,38 @@
 </head>
 <body>
   <header class="topbar">
-    <div class="brand"><div class="brand-mark" aria-hidden="true"><svg width="23" height="23" viewBox="0 0 24 24" fill="none"><path d="M7 4H4v16h16v-3M11 4h9v9M19 5l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 17h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div><strong>LG Reverse Lab</strong><span>Editor de interface <span style="display:inline;color:#d9e78e;margin-left:5px">0.2.1</span></span></div></div>
-    <div class="top-badge"><span class="dot"></span><span>Exemplo LG LAB confirmado no aparelho</span></div>
+    <div class="brand"><div class="brand-mark" aria-hidden="true"><svg width="23" height="23" viewBox="0 0 24 24" fill="none"><path d="M7 4H4v16h16v-3M11 4h9v9M19 5l-9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 17h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div><strong>LG Reverse Lab</strong><span>Interface editor <span style="display:inline;color:#d9e78e;margin-left:5px">0.2.1</span></span></div></div>
+    <div class="top-badge"><span class="dot"></span><span>LG LAB example confirmed on hardware</span></div>
   </header>
   <main class="page">
-    <div class="intro"><div><p class="eyebrow">Do firmware para a sua interface</p><h1>Dê outra cara aos menus.</h1><p>Edite textos reais do LG e confira a prévia com as fontes extraídas. Aqui você gera um arquivo experimental no PC.</p></div><div class="step-label" aria-label="Etapas: escolher, editar e gerar"><span class="step-dot">1</span> Escolher <span class="step-line"></span><span class="step-dot">2</span> Editar <span class="step-line"></span><span class="step-dot">3</span> Gerar</div></div>
-    <p style="margin:0 0 20px"><a class="button" href="/experimento" target="_blank" rel="noopener">Ver a primeira rotina e os testes no PC ↗</a></p>
+    <div class="intro"><div><p class="eyebrow">From firmware to your interface</p><h1>Give the menus a fresh look.</h1><p>Edit actual LG text and preview it with the extracted fonts. Generate an experimental file on your PC.</p></div><div class="step-label" aria-label="Steps: select, edit, and build"><span class="step-dot">1</span> Select <span class="step-line"></span><span class="step-dot">2</span> Edit <span class="step-line"></span><span class="step-dot">3</span> Build</div></div>
+    <p style="margin:0 0 20px"><a class="button" href="/experimento" target="_blank" rel="noopener">View the first routine and PC tests ↗</a></p>
     <div id="notice" class="notice" role="status" aria-live="polite"></div>
     <div class="layout">
-      <aside class="card catalog" aria-label="Catálogo de textos">
-        <div class="catalog-head"><h2 class="section-title"><span class="number">01</span> Escolha um texto</h2><div class="catalog-controls"><div><label class="field-label" for="language">Idioma do menu</label><div class="select-wrap"><select id="language" disabled><option>Carregando idiomas…</option></select><svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div><div class="search-wrap"><label class="sr-only" for="search">Buscar um texto ou número</label><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="4.4" stroke="currentColor" stroke-width="1.3"/><path d="m10.5 10.5 3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><input id="search" type="search" placeholder="Buscar texto ou número…" autocomplete="off" disabled></div></div></div>
-        <label class="filter-toggle" for="only-editable"><input id="only-editable" type="checkbox" checked disabled>Apenas editáveis</label><div class="list-meta"><span id="result-count">Catálogo</span><span>Texto do menu</span></div><div id="record-list" class="record-list" aria-label="Textos disponíveis"><div class="empty loading">Lendo o firmware…</div></div><div class="catalog-foot">Os números identificam cada texto no firmware.<div id="pagination" class="pagination" hidden><button id="page-back" type="button" aria-label="Página anterior">‹</button><span id="page-count" class="page-count"></span><button id="page-next" type="button" aria-label="Próxima página">›</button></div></div>
+      <aside class="card catalog" aria-label="Text catalog">
+        <div class="catalog-head"><h2 class="section-title"><span class="number">01</span> Choose a text entry</h2><div class="catalog-controls"><div><label class="field-label" for="language">Menu language</label><div class="select-wrap"><select id="language" disabled><option>Loading languages…</option></select><svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div><div class="search-wrap"><label class="sr-only" for="search">Search for text or a number</label><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="4.4" stroke="currentColor" stroke-width="1.3"/><path d="m10.5 10.5 3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><input id="search" type="search" placeholder="Search text or number…" autocomplete="off" disabled></div></div></div>
+        <label class="filter-toggle" for="only-editable"><input id="only-editable" type="checkbox" checked disabled>Editable only</label><div class="list-meta"><span id="result-count">Catalog</span><span>Menu text</span></div><div id="record-list" class="record-list" aria-label="Available text entries"><div class="empty loading">Reading firmware…</div></div><div class="catalog-foot">The numbers identify each text entry in the firmware.<div id="pagination" class="pagination" hidden><button id="page-back" type="button" aria-label="Previous page">‹</button><span id="page-count" class="page-count"></span><button id="page-next" type="button" aria-label="Next page">›</button></div></div>
       </aside>
       <div class="workspace">
         <section class="card editor" aria-labelledby="editor-title">
-          <div class="editor-top"><h2 id="editor-title" class="section-title"><span class="number">02</span> Edite a interface</h2><span id="selected-badge" class="tiny-badge">Selecione um texto</span></div>
-          <div class="editor-body"><div class="text-context"><label for="edit-text"><strong>O que vai aparecer no menu</strong></label><span id="original-context">Escolha um texto ao lado</span></div><textarea id="edit-text" class="editor-input" rows="1" placeholder="Seu texto aparece aqui" disabled spellcheck="false"></textarea><div class="input-meta"><span id="edit-hint">O espaço disponível depende do texto original.</span><span id="char-count">—</span></div><div class="editor-actions"><button id="reset-edit" class="button" type="button" disabled>Restaurar original</button><button id="add-edit" class="button primary" type="button" disabled><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Adicionar alteração</button></div></div>
-          <div class="preview-area"><div class="preview-heading"><h3>Uma prévia do resultado</h3><span id="preview-state">Aguardando seleção</span></div><div class="previews"><div class="preview-box"><div class="preview-label">Original</div><div id="original-preview" class="preview-canvas"><span class="preview-placeholder">Texto original do firmware</span></div></div><div class="preview-box after"><div class="preview-label"><span class="dot" style="width:4px;height:4px;background:#91b16c"></span> Sua edição</div><div id="edited-preview" class="preview-canvas"><span class="preview-placeholder">Sua edição com a fonte do LG</span></div></div></div><p id="preview-caption" class="preview-caption">Prévia com fontes extraídas · cores de referência. O resultado no aparelho ainda precisa ser testado.</p><p id="layout-warning" class="layout-warning" hidden></p></div>
+          <div class="editor-top"><h2 id="editor-title" class="section-title"><span class="number">02</span> Edit the interface</h2><span id="selected-badge" class="tiny-badge">Select a text entry</span></div>
+          <div class="editor-body"><div class="text-context"><label for="edit-text"><strong>Text shown in the menu</strong></label><span id="original-context">Choose an entry on the left</span></div><textarea id="edit-text" class="editor-input" rows="1" placeholder="Your text appears here" disabled spellcheck="false"></textarea><div class="input-meta"><span id="edit-hint">Available space depends on the original text.</span><span id="char-count">—</span></div><div class="editor-actions"><button id="reset-edit" class="button" type="button" disabled>Restore original</button><button id="add-edit" class="button primary" type="button" disabled><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Add change</button></div></div>
+          <div class="preview-area"><div class="preview-heading"><h3>Preview the result</h3><span id="preview-state">Waiting for a selection</span></div><div class="previews"><div class="preview-box"><div class="preview-label">Original</div><div id="original-preview" class="preview-canvas"><span class="preview-placeholder">Original firmware text</span></div></div><div class="preview-box after"><div class="preview-label"><span class="dot" style="width:4px;height:4px;background:#91b16c"></span> Your edit</div><div id="edited-preview" class="preview-canvas"><span class="preview-placeholder">Your edit in the LG font</span></div></div></div><p id="preview-caption" class="preview-caption">Preview with extracted fonts · reference colors. The result still needs to be tested on hardware.</p><p id="layout-warning" class="layout-warning" hidden></p></div>
         </section>
         <div class="lower-grid">
-          <section class="card changes" aria-labelledby="changes-title"><div class="card-heading"><h2 id="changes-title" class="section-title">Sua revisão</h2><span id="changes-count" class="count-badge">0</span></div><ul id="changes-list" class="changes-list"></ul><div id="changes-empty" class="changes-empty">Adicione seus textos para montar o protótipo. Você pode revisar e remover cada alteração aqui.</div><div class="changes-bottom"><button id="preset" class="preset" type="button" disabled><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m8 1 1.8 4.8L15 8l-5.2 1.8L8 15l-1.8-5.2L1 8l5.2-2.2L8 1Z" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/></svg>Preparar “LG LAB”</button><button id="clear-edits" class="clear" type="button" disabled>Limpar revisão</button></div></section>
-          <section class="card build" aria-labelledby="build-title"><h2 id="build-title" class="section-title"><span class="number">03</span> Gere seu protótipo</h2><p>Monte uma cópia do firmware com os textos da sua revisão. O original fica disponível para comparação.</p><button id="build" class="button accent" type="button" disabled><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2v8m-3-3 3 3 3-3M3 10v3h10v-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="build-label">Gerar protótipo</span></button><p class="build-note">Gera um arquivo local. Não instala no aparelho.</p><div id="build-status" class="build-status" role="status" aria-live="polite"></div><div id="build-output" class="build-output" hidden><div class="output-head"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6" stroke="currentColor"/><path d="m5 8 2 2 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Arquivo gerado e validado</div><div id="output-name" class="output-name"></div><a id="download" class="button download" href="#" download>Salvar cópia para análise no PC</a><a id="manifest" class="manifest-link" href="#" hidden>Ver registro de alterações</a><a id="restore" class="manifest-link" href="#" download hidden>Arquivo de reversão</a></div></section>
+          <section class="card changes" aria-labelledby="changes-title"><div class="card-heading"><h2 id="changes-title" class="section-title">Your changes</h2><span id="changes-count" class="count-badge">0</span></div><ul id="changes-list" class="changes-list"></ul><div id="changes-empty" class="changes-empty">Add text edits to build the prototype. Review or remove each change here.</div><div class="changes-bottom"><button id="preset" class="preset" type="button" disabled><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m8 1 1.8 4.8L15 8l-5.2 1.8L8 15l-1.8-5.2L1 8l5.2-2.2L8 1Z" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/></svg>Prepare “LG LAB”</button><button id="clear-edits" class="clear" type="button" disabled>Clear changes</button></div></section>
+          <section class="card build" aria-labelledby="build-title"><h2 id="build-title" class="section-title"><span class="number">03</span> Build your prototype</h2><p>Build a firmware copy with your text changes. The original remains available for comparison.</p><button id="build" class="button accent" type="button" disabled><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2v8m-3-3 3 3 3-3M3 10v3h10v-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="build-label">Build prototype</span></button><p class="build-note">Creates a local file. Does not install it on the device.</p><div id="build-status" class="build-status" role="status" aria-live="polite"></div><div id="build-output" class="build-output" hidden><div class="output-head"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6" stroke="currentColor"/><path d="m5 8 2 2 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>File generated and validated</div><div id="output-name" class="output-name"></div><a id="download" class="button download" href="#" download>Save copy for PC analysis</a><a id="manifest" class="manifest-link" href="#" hidden>View change manifest</a><a id="restore" class="manifest-link" href="#" download hidden>Inverse patch file</a></div></section>
         </div>
       </div>
     </div>
-    <footer class="footer"><div id="firmware" class="firmware">Firmware de referência <span>aguardando leitura…</span></div><div class="footer-status"><span class="dot"></span>Funciona localmente neste PC</div></footer>
+    <footer class="footer"><div id="firmware" class="firmware">Reference firmware <span>waiting for firmware…</span></div><div class="footer-status"><span class="dot"></span>Runs locally on this PC</div></footer>
   </main>
   <script>
   'use strict';
   const $ = id => document.getElementById(id);
   const state = {catalog:null, language:null, record:null, edits:new Map(), previewRequest:0, previewTimer:null, building:false, page:0, filteredCount:0};
   const icons = {
-    lock:'<svg class="lock" width="11" height="12" viewBox="0 0 12 13" fill="none" aria-label="Texto não editável"><rect x="2" y="5" width="8" height="6" rx="1.2" stroke="currentColor"/><path d="M4 5V3a2 2 0 0 1 4 0v2" stroke="currentColor"/></svg>',
+    lock:'<svg class="lock" width="11" height="12" viewBox="0 0 12 13" fill="none" aria-label="Read-only text"><rect x="2" y="5" width="8" height="6" rx="1.2" stroke="currentColor"/><path d="M4 5V3a2 2 0 0 1 4 0v2" stroke="currentColor"/></svg>',
     arrow:'<svg width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     pencil:'<svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="m9 2 3 3-6 6-4 1 1-4 6-6Z" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/><path d="m8 3 3 3" stroke="currentColor" stroke-width="1.1"/></svg>'
   };
@@ -61,12 +61,12 @@
   function limit(record){const n=Number(record?.max_chars);return Number.isFinite(n)&&n>=0?n:0;}
   function length(value){return Array.from(value).length;}
   function setNotice(message,error=false){$('notice').textContent=message;$('notice').className='notice'+(message?' visible':'')+(error?' error':'');}
-  function languageLabel(language){return language?.label||('Idioma '+language?.index);}
+  function languageLabel(language){return language?.label||('Language '+language?.index);}
   function currentText(){return state.record?state.edits.get(key(state.language.index,state.record.id))?.text??state.record.text??'':'';}
   async function api(url,body){
     const response=await fetch(url,body===undefined?{cache:'no-store'}:{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
-    let data;try{data=await response.json();}catch(error){throw new Error('O servidor local retornou uma resposta inválida.');}
-    if(!response.ok||data?.error){const detail=typeof data?.error==='object'?data.error.message:data?.error;throw new Error(detail||data?.message||('Não foi possível concluir a operação ('+response.status+').'));}
+    let data;try{data=await response.json();}catch(error){throw new Error('The local server returned an invalid response.');}
+    if(!response.ok||data?.error){const detail=typeof data?.error==='object'?data.error.message:data?.error;throw new Error(detail||data?.message||('Could not complete the operation ('+response.status+').'));}
     return data;
   }
   function filteredRecords(){
@@ -77,14 +77,14 @@
     const list=$('record-list');list.replaceChildren();
     const all=filteredRecords();
     state.filteredCount=all.length;const pages=Math.max(1,Math.ceil(all.length/80));state.page=Math.max(0,Math.min(state.page,pages-1));const records=all.slice(state.page*80,(state.page+1)*80);
-    $('result-count').textContent=all.length+($('only-editable').checked?' editáveis de ':' de ')+(state.language?.records.length||0)+' textos';$('pagination').hidden=pages<=1;$('page-count').textContent=(state.page+1)+' / '+pages;$('page-back').disabled=state.page===0;$('page-next').disabled=state.page>=pages-1;
-    if(!records.length){const empty=document.createElement('div');empty.className='empty';empty.textContent='Nenhum texto encontrado. Tente outra palavra ou número.';list.append(empty);return;}
+    $('result-count').textContent=all.length+($('only-editable').checked?' editable out of ':' out of ')+(state.language?.records.length||0)+' entries';$('pagination').hidden=pages<=1;$('page-count').textContent=(state.page+1)+' / '+pages;$('page-back').disabled=state.page===0;$('page-next').disabled=state.page>=pages-1;
+    if(!records.length){const empty=document.createElement('div');empty.className='empty';empty.textContent='No entries found. Try another word or number.';list.append(empty);return;}
     const fragment=document.createDocumentFragment();
     for(const record of records){
       const button=document.createElement('button');button.type='button';button.className='record'+(state.record?.id===record.id?' active':'');button.setAttribute('aria-pressed',String(state.record?.id===record.id));button.title=String(record.text??'');
       const id=document.createElement('span');id.className='record-id';id.textContent=String(record.id).padStart(3,'0');
-      const text=document.createElement('span');text.className='record-text';text.textContent=record.text||'(texto vazio)';button.append(id,text);
-      if(state.edits.has(key(state.language.index,record.id))){const dot=document.createElement('span');dot.className='edited-dot';dot.title='Na sua revisão';button.append(dot);}else if(record.editable===false){button.insertAdjacentHTML('beforeend',icons.lock);}
+      const text=document.createElement('span');text.className='record-text';text.textContent=record.text||'(empty text)';button.append(id,text);
+      if(state.edits.has(key(state.language.index,record.id))){const dot=document.createElement('span');dot.className='edited-dot';dot.title='In your changes';button.append(dot);}else if(record.editable===false){button.insertAdjacentHTML('beforeend',icons.lock);}
       button.addEventListener('click',()=>selectRecord(record));fragment.append(button);
     }
     list.append(fragment);
@@ -96,39 +96,39 @@
     selectRecord(first||null);
   }
   function selectRecord(record){
-    state.record=record;$('selected-badge').textContent=record?'Texto '+String(record.id).padStart(3,'0'):'Nenhum texto';
+    state.record=record;$('selected-badge').textContent=record?'Text '+String(record.id).padStart(3,'0'):'No text selected';
     if(record){const index=filteredRecords().indexOf(record);if(index>=0)state.page=Math.floor(index/80);}
-    $('original-context').textContent=record?languageLabel(state.language):'Escolha um texto ao lado';
+    $('original-context').textContent=record?languageLabel(state.language):'Choose an entry on the left';
     $('edit-text').value=currentText();$('edit-text').disabled=!record||record.editable===false;
     $('reset-edit').disabled=!record||record.editable===false;
     renderRecords();updateInput();schedulePreview(0);
   }
   function updateInput(){
     const record=state.record;const text=$('edit-text').value;const max=limit(record);const count=length(text);const over=record&&count>max;
-    $('char-count').textContent=record?count+' / '+max+' caracteres':'—';$('char-count').className=over?'over-limit':'';$('edit-text').classList.toggle('invalid',Boolean(over));
-    $('edit-hint').textContent=!record?'O espaço disponível depende do texto original.':record.editable===false?'Este registro não está disponível para edição.':over?'O texto ultrapassa o espaço disponível.':'Use os caracteres disponíveis na fonte deste idioma.';
+    $('char-count').textContent=record?count+' / '+max+' characters':'—';$('char-count').className=over?'over-limit':'';$('edit-text').classList.toggle('invalid',Boolean(over));
+    $('edit-hint').textContent=!record?'Available space depends on the original text.':record.editable===false?'This entry is read-only.':over?'The text exceeds the available space.':'Use characters available in this language font.';
     $('add-edit').disabled=!record||record.editable===false||over||text===String(record.text??'')||!text.trim();
-    const exists=record&&state.edits.has(key(state.language.index,record.id));$('add-edit').lastChild.textContent=exists?'Atualizar alteração':'Adicionar alteração';
+    const exists=record&&state.edits.has(key(state.language.index,record.id));$('add-edit').lastChild.textContent=exists?'Update change':'Add change';
   }
   function schedulePreview(delay=450){clearTimeout(state.previewTimer);state.previewRequest++;state.previewTimer=setTimeout(preview,delay);}
   function placeholder(target,text){target.replaceChildren();const span=document.createElement('span');span.className='preview-placeholder';span.textContent=text;target.append(span);}
   function imagePreview(target,url,alt){
-    if(!url){placeholder(target,'Prévia indisponível');return;}
-    let parsed;try{parsed=new URL(url,location.href);}catch(error){placeholder(target,'Prévia indisponível');return;}
-    if(parsed.origin!==location.origin){placeholder(target,'Prévia indisponível');return;}
-    target.replaceChildren();const image=document.createElement('img');image.src=parsed.href;image.alt=alt;image.addEventListener('error',()=>placeholder(target,'Não foi possível carregar esta prévia.'),{once:true});target.append(image);
+    if(!url){placeholder(target,'Preview unavailable');return;}
+    let parsed;try{parsed=new URL(url,location.href);}catch(error){placeholder(target,'Preview unavailable');return;}
+    if(parsed.origin!==location.origin){placeholder(target,'Preview unavailable');return;}
+    target.replaceChildren();const image=document.createElement('img');image.src=parsed.href;image.alt=alt;image.addEventListener('error',()=>placeholder(target,'Could not load this preview.'),{once:true});target.append(image);
   }
   async function preview(){
     const ticket=state.previewRequest;const record=state.record;const text=$('edit-text').value;
-    if(!record){placeholder($('original-preview'),'Texto original do firmware');placeholder($('edited-preview'),'Sua edição com a fonte do LG');$('preview-state').textContent='Aguardando seleção';return;}
-    if(length(text)>limit(record)){$('preview-state').textContent='Texto acima do limite';placeholder($('edited-preview'),'Reduza o texto para ver a prévia.');return;}
-    $('preview-state').textContent='Preparando a prévia…';$('preview-caption').classList.remove('error');$('layout-warning').hidden=true;
+    if(!record){placeholder($('original-preview'),'Original firmware text');placeholder($('edited-preview'),'Your edit in the LG font');$('preview-state').textContent='Waiting for a selection';return;}
+    if(length(text)>limit(record)){$('preview-state').textContent='Text exceeds the limit';placeholder($('edited-preview'),'Shorten the text to see a preview.');return;}
+    $('preview-state').textContent='Preparing preview…';$('preview-caption').classList.remove('error');$('layout-warning').hidden=true;
     try{
       const data=await api('/api/preview',{language:state.language.index,id:record.id,text});if(ticket!==state.previewRequest)return;
-      imagePreview($('original-preview'),data.original_image,'Texto original: '+String(data.before??record.text??''));imagePreview($('edited-preview'),data.edited_image,'Texto editado: '+String(data.text??text));
-      $('preview-state').textContent='Fonte original do firmware';$('preview-caption').textContent='Prévia com fontes extraídas · cores de referência. O resultado no aparelho ainda precisa ser testado.';
+      imagePreview($('original-preview'),data.original_image,'Original text: '+String(data.before??record.text??''));imagePreview($('edited-preview'),data.edited_image,'Edited text: '+String(data.text??text));
+      $('preview-state').textContent='Original firmware font';$('preview-caption').textContent='Preview with extracted fonts · reference colors. The result still needs to be tested on hardware.';
       $('layout-warning').hidden=!data.layout_warning;$('layout-warning').textContent=data.layout_warning||'';
-    }catch(error){if(ticket!==state.previewRequest)return;$('preview-state').textContent='Prévia indisponível';$('preview-caption').textContent=error.message;$('preview-caption').classList.add('error');placeholder($('edited-preview'),'Revise o texto para gerar a prévia.');}
+    }catch(error){if(ticket!==state.previewRequest)return;$('preview-state').textContent='Preview unavailable';$('preview-caption').textContent=error.message;$('preview-caption').classList.add('error');placeholder($('edited-preview'),'Review the text to generate a preview.');}
   }
   function addEdit(language,record,text){
     if(text===String(record.text??'')){state.edits.delete(key(language.index,record.id));return;}
@@ -138,9 +138,9 @@
     const list=$('changes-list');list.replaceChildren();$('changes-count').textContent=state.edits.size;$('changes-empty').hidden=state.edits.size>0;$('clear-edits').disabled=!state.edits.size||state.building;$('build').disabled=!state.edits.size||state.building;
     for(const [entryKey,edit] of state.edits){
       const item=document.createElement('li');item.className='change-item';const icon=document.createElement('span');icon.className='change-icon';icon.innerHTML=icons.pencil;
-      const content=document.createElement('div');content.className='change-content';const location=document.createElement('span');location.className='location';location.textContent=edit.label+' · TEXTO '+String(edit.id).padStart(3,'0');
+      const content=document.createElement('div');content.className='change-content';const location=document.createElement('span');location.className='location';location.textContent=edit.label+' · TEXT '+String(edit.id).padStart(3,'0');
       const text=document.createElement('div');text.className='change-text';const before=document.createElement('del');before.textContent=edit.before;before.title=edit.before;const after=document.createElement('strong');after.textContent=edit.text;after.title=edit.text;text.append(before);text.insertAdjacentHTML('beforeend',icons.arrow);text.append(after);content.append(location,text);
-      const remove=document.createElement('button');remove.className='remove-change';remove.type='button';remove.textContent='×';remove.title='Remover alteração';remove.setAttribute('aria-label','Remover alteração do texto '+edit.id+' em '+edit.label);remove.disabled=state.building;
+      const remove=document.createElement('button');remove.className='remove-change';remove.type='button';remove.textContent='×';remove.title='Remove change';remove.setAttribute('aria-label','Remove change to text '+edit.id+' in '+edit.label);remove.disabled=state.building;
       remove.addEventListener('click',()=>{state.edits.delete(entryKey);renderChanges();renderRecords();updateInput();});item.append(icon,content,remove);list.append(item);
     }
   }
@@ -150,45 +150,45 @@
   }
   async function build(){
     if(state.building||!state.edits.size)return;
-    state.building=true;renderChanges();$('build-label').textContent='Geração em andamento…';$('build-status').className='build-status';$('build-status').textContent='Aplicando os textos e conferindo a cópia gerada…';$('build-output').hidden=true;
+    state.building=true;renderChanges();$('build-label').textContent='Build in progress…';$('build-status').className='build-status';$('build-status').textContent='Applying text edits and verifying the generated copy…';$('build-output').hidden=true;
     const edits=Array.from(state.edits.values(),edit=>({language:edit.language,id:edit.id,text:edit.text}));
     try{
       const data=await api('/api/build',{edits});
-      if(data.validation===false||data.validation?.ok===false)throw new Error('A cópia gerada não passou na validação. Consulte o registro local.');
+      if(data.validation===false||data.validation?.ok===false)throw new Error('The generated copy failed validation. Check the local log.');
       const name=data.name||String(data.path||'').split(/[\\/]/).pop();const url=localOutputUrl(data.download_url||data.url,name);
-      if(!name||!url)throw new Error('O servidor não informou o arquivo gerado.');
+      if(!name||!url)throw new Error('The server did not return the generated file.');
       $('output-name').textContent=name;$('download').href=url;$('download').download=name;
       const manifestValue=typeof data.manifest==='string'?data.manifest:data.manifest?.url||data.manifest?.path||data.manifest?.name;
       const manifestName=manifestValue?String(manifestValue).split(/[\\/]/).pop():null;const manifestUrl=localOutputUrl(data.manifest_url,manifestName);
       $('manifest').hidden=!manifestUrl;if(manifestUrl)$('manifest').href=manifestUrl;
       const restoreUrl=localOutputUrl(data.restore_url,null);$('restore').hidden=!restoreUrl;if(restoreUrl)$('restore').href=restoreUrl;
-      $('build-status').textContent=edits.length+(edits.length===1?' alteração aplicada.':' alterações aplicadas.')+' Cópia para análise no PC. A instalação no LG ainda não está validada.';$('build-output').hidden=false;
-      $('download').textContent='Salvar cópia para análise no PC';
-      setNotice('Cópia para análise gerada. Ainda não há procedimento de instalação validado para o seu LG; não renomeie o arquivo como atualização .ROM.');
+      $('build-status').textContent=edits.length+(edits.length===1?' change applied.':' changes applied.')+' Copy for PC analysis. Installation on the LG is not yet validated.';$('build-output').hidden=false;
+      $('download').textContent='Save copy for PC analysis';
+      setNotice('Analysis copy generated. Installation on your LG is not validated; do not rename this file as a .ROM update.');
     }catch(error){$('build-status').textContent=error.message;$('build-status').className='build-status error';}
-    finally{state.building=false;$('build-label').textContent='Gerar protótipo';renderChanges();}
+    finally{state.building=false;$('build-label').textContent='Build prototype';renderChanges();}
   }
   async function load(){
     try{
-      const data=await api('/api/catalog');if(!Array.isArray(data.languages)||!data.languages.length)throw new Error('O catálogo de idiomas não foi encontrado.');state.catalog=data;
+      const data=await api('/api/catalog');if(!Array.isArray(data.languages)||!data.languages.length)throw new Error('The language catalog was not found.');state.catalog=data;
       const languageSelect=$('language');languageSelect.replaceChildren();for(const language of data.languages){const option=document.createElement('option');option.value=language.index;option.textContent=languageLabel(language);languageSelect.append(option);}
       languageSelect.disabled=false;$('search').disabled=false;$('only-editable').disabled=false;$('preset').disabled=false;
-      const firmware=data.firmware||{};$('firmware').replaceChildren(document.createTextNode(firmware.name||'Firmware de referência'));const details=document.createElement('span');details.textContent=(firmware.size?new Intl.NumberFormat('pt-BR').format(firmware.size)+' bytes':'')+(firmware.sha256?' · SHA-256 '+firmware.sha256.slice(0,12)+'…':'');details.title=firmware.sha256||'';$('firmware').append(details);
+      const firmware=data.firmware||{};$('firmware').replaceChildren(document.createTextNode(firmware.name||'Reference firmware'));const details=document.createElement('span');details.textContent=(firmware.size?new Intl.NumberFormat('en-US').format(firmware.size)+' bytes':'')+(firmware.sha256?' · SHA-256 '+firmware.sha256.slice(0,12)+'…':'');details.title=firmware.sha256||'';$('firmware').append(details);
       selectLanguage(data.languages.find(item=>Number(item.index)===6)?.index??data.languages[0].index);
-    }catch(error){setNotice(error.message+' Mantenha o servidor local aberto e recarregue esta página.',true);placeholder($('record-list'),'Não foi possível carregar o catálogo.');$('result-count').textContent='Indisponível';}
+    }catch(error){setNotice(error.message+' Keep the local server running and reload this page.',true);placeholder($('record-list'),'Could not load the catalog.');$('result-count').textContent='Unavailable';}
   }
   $('language').addEventListener('change',event=>selectLanguage(event.target.value));$('search').addEventListener('input',()=>{state.page=0;renderRecords();});
   $('only-editable').addEventListener('change',()=>{state.page=0;const records=filteredRecords();selectRecord(records.find(record=>record.id===state.record?.id)||records.find(record=>Number(record.id)===157)||records[0]||null);});
   $('page-back').addEventListener('click',()=>{state.page--;renderRecords();$('record-list').scrollTop=0;});$('page-next').addEventListener('click',()=>{state.page++;renderRecords();$('record-list').scrollTop=0;});
   $('edit-text').addEventListener('input',()=>{updateInput();schedulePreview();});
   $('reset-edit').addEventListener('click',()=>{if(!state.record)return;$('edit-text').value=String(state.record.text??'');updateInput();schedulePreview(0);});
-  $('add-edit').addEventListener('click',()=>{if($('add-edit').disabled)return;addEdit(state.language,state.record,$('edit-text').value);renderChanges();renderRecords();updateInput();setNotice('Texto adicionado à revisão. Confira suas alterações antes de gerar o protótipo.');});
-  $('clear-edits').addEventListener('click',()=>{state.edits.clear();renderChanges();renderRecords();updateInput();setNotice('A revisão foi limpa.');});
+  $('add-edit').addEventListener('click',()=>{if($('add-edit').disabled)return;addEdit(state.language,state.record,$('edit-text').value);renderChanges();renderRecords();updateInput();setNotice('Text added to your changes. Review your edits before building the prototype.');});
+  $('clear-edits').addEventListener('click',()=>{state.edits.clear();renderChanges();renderRecords();updateInput();setNotice('Changes cleared.');});
   $('preset').addEventListener('click',()=>{
     if(!state.catalog)return;let added=0;
     for(const index of [6,22]){const language=state.catalog.languages.find(item=>Number(item.index)===index);if(!language)continue;for(const id of [157,223,289]){const record=language.records.find(item=>Number(item.id)===id);if(record&&record.editable!==false&&limit(record)>=6){addEdit(language,record,'LG LAB');added++;}}}
     renderChanges();renderRecords();if(state.record&&state.edits.has(key(state.language.index,state.record.id))){$('edit-text').value=currentText();updateInput();schedulePreview(0);}
-    setNotice(added?'“LG LAB” preparado em '+added+' textos de português. Confira a revisão abaixo.':'Os textos do exemplo não estão disponíveis neste catálogo.',!added);
+    setNotice(added?'“LG LAB” prepared in '+added+' Portuguese text entries. Review the changes below.':'The example entries are not available in this catalog.',!added);
   });
   $('build').addEventListener('click',build);load();
   </script>

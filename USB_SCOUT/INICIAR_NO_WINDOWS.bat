@@ -11,9 +11,9 @@ if %ERRORLEVEL% EQU 0 (
     python "%~dp0lg_scout.py"
     goto :done
 )
-echo Nao foi encontrado Python 3 no Windows.
-echo Instale Python 3 oficial e marque 'Add Python to PATH'.
-echo Nao eh necessario instalar qualquer coisa no Home Theater.
+echo Python 3 was not found on Windows.
+echo Install official Python 3 and select 'Add Python to PATH'.
+echo Nothing needs to be installed on the home theater.
 :done
 if %ERRORLEVEL% NEQ 0 pause
 endlocal

@@ -104,9 +104,9 @@ class EngineTests(unittest.TestCase):
         self.assertEqual(catalog["encoding"]["space_byte"], "0x40")
         # Typing the displayed original must recreate the same original bytes,
         # and therefore remain an unchanged edit rather than rewriting spaces.
-        with self.assertRaisesRegex(EngineError, "não modifica"):
+        with self.assertRaisesRegex(EngineError, "does not modify"):
             self.engine.prepare_edit({"language": 6, "id": 97, "text": record["text"]})
-        with self.assertRaisesRegex(EngineError, "símbolo @ literal"):
+        with self.assertRaisesRegex(EngineError, "literal @ symbol"):
             self.engine.prepare_edit({"language": 6, "id": 97, "text": record["raw_text"]})
         prepared = self.engine.prepare_edit({"language": 6, "id": 97, "text": "LG LAB"})
         self.assertEqual(prepared["before_hex"], b"Apagar@Tudo".hex())

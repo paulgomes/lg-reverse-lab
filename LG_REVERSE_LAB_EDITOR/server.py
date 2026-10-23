@@ -13,12 +13,12 @@ from glyph_preview import GlyphPreview
 
 APP = Path(__file__).resolve().parent
 WORKSPACE = APP.parent
-LABELS = ['Inglês', 'Coreano (inferido)', 'Chinês simplificado / DRM (inferido)',
-          'Francês', 'Espanhol', 'Alemão', 'Português', 'Italiano', 'Holandês',
-          'Húngaro', 'Polonês', 'Russo (inferido)', 'Sueco', 'Tcheco',
-          'Grego (inferido)', 'Chinês tradicional (inferido)', 'Japonês (inferido)',
-          'Persa (inferido)', 'Tailandês (inferido)', 'Vietnamita', 'Turco',
-          'Indonésio', 'Português do Brasil (inferido)', 'Romeno', 'Eslovaco']
+LABELS = ['English', 'Korean (inferred)', 'Simplified Chinese / DRM (inferred)',
+          'French', 'Spanish', 'German', 'Portuguese', 'Italian', 'Dutch',
+          'Hungarian', 'Polish', 'Russian (inferred)', 'Swedish', 'Czech',
+          'Greek (inferred)', 'Traditional Chinese (inferred)', 'Japanese (inferred)',
+          'Persian (inferred)', 'Thai (inferred)', 'Vietnamese', 'Turkish',
+          'Indonesian', 'Brazilian Portuguese (inferred)', 'Romanian', 'Slovak']
 
 
 class Application:
@@ -40,16 +40,16 @@ class Application:
 
     def preview(self, payload):
         if not isinstance(payload, dict) or set(payload) != {'language', 'id', 'text'}:
-            raise EngineError('Escolha idioma, texto e uma nova versão para a prévia.')
+            raise EngineError('Choose a language, entry, and replacement text for the preview.')
         language, ident, text = payload['language'], payload['id'], payload['text']
         if type(language) is not int or type(ident) is not int or not isinstance(text, str):
-            raise EngineError('Idioma, ID ou texto inválido.')
+            raise EngineError('Invalid language, ID, or text.')
         rec = self.records.get((language, ident))
         if rec is None:
-            raise EngineError('Registro não encontrado.')
+            raise EngineError('Entry not found.')
         if not rec['editable']:
             if text != rec['text']:
-                raise EngineError('Este registro pode ser consultado; a edição não está disponível.')
+                raise EngineError('This entry is read-only; editing is unavailable.')
             image = '/api/image?' + urlencode({'language': language, 'id': ident})
             width = self.fonts.compose(language, ident).width
             return {'before': rec['text'], 'text': rec['text'], 'stored_text': rec['text'],
@@ -68,7 +68,7 @@ class Application:
                 'stored_display_text': stored.replace('@', ' '),
                 'max_chars': rec['max_chars'], 'padding': len(stored) - len(text),
                 'unchanged': unchanged, 'before_width': before.width, 'after_width': after.width,
-                'layout_warning': 'Texto mais largo que o original; confira o espaço no menu.'
+                'layout_warning': 'Text is wider than the original; check the available menu space.'
                                   if after.width > before.width else '',
                 'original_image': '/api/image?' + urlencode(query),
                 'edited_image': '/api/image?' + urlencode({**query, 'text': text})}
@@ -110,7 +110,7 @@ def handler_for(app):
                             parsed.port != self.server.server_port):
                         raise ValueError()
             except ValueError:
-                self.respond(403, {'error': 'Abra o editor pelo endereço local exibido no iniciador.'})
+                self.respond(403, {'error': 'Open the editor at the local address shown by the launcher.'})
                 return False
             return True
 
@@ -149,7 +149,7 @@ def handler_for(app):
                     query = parse_qs(parsed.query, keep_blank_values=True)
                     language, ident = int(query['language'][0]), int(query['id'][0])
                     if (language, ident) not in app.records:
-                        raise EngineError('Registro não encontrado.')
+                        raise EngineError('Entry not found.')
                     text = query.get('text', [None])[0]
                     if text is not None:
                         prepared = app.preview({'language': language, 'id': ident, 'text': text})
@@ -161,14 +161,14 @@ def handler_for(app):
                     if (Path(name).name != name or path.parent != app.engine.outputs_dir.resolve()
                             or not name.endswith(('.preview.bin', '.manifest.json', '.restore.json'))
                             or not path.is_file()):
-                        self.respond(404, {'error': 'Arquivo de saída não encontrado.'})
+                        self.respond(404, {'error': 'Output file not found.'})
                         return
                     kind = 'application/json' if name.endswith('.json') else 'application/octet-stream'
                     self.respond(200, path.read_bytes(), kind, name)
                 elif parsed.path == '/favicon.ico':
                     self.respond(204, b'')
                 else:
-                    self.respond(404, {'error': 'Página não encontrada.'})
+                    self.respond(404, {'error': 'Page not found.'})
             except (EngineError, ValueError, KeyError, IndexError) as exc:
                 self.respond(400, {'error': str(exc)})
 
@@ -178,19 +178,19 @@ def handler_for(app):
             try:
                 size = int(self.headers.get('Content-Length', '0'))
                 if not 0 < size <= 131072 or self.headers.get_content_type() != 'application/json':
-                    raise EngineError('Envie uma solicitação JSON de até 128 KB.')
+                    raise EngineError('Send a JSON request of up to 128 KB.')
                 payload = json.loads(self.rfile.read(size))
                 if self.path == '/api/preview':
                     self.respond(200, app.preview(payload))
                 elif self.path == '/api/build':
                     if (not isinstance(payload, dict) or set(payload) != {'edits'} or
                             not isinstance(payload['edits'], list) or len(payload['edits']) > 128):
-                        raise EngineError('Selecione entre uma e 128 alterações.')
+                        raise EngineError('Select between one and 128 changes.')
                     with app.lock:
                         result = app.engine.build(payload['edits'])
                     self.respond(200, app.output_links(result))
                 else:
-                    self.respond(404, {'error': 'Ação não encontrada.'})
+                    self.respond(404, {'error': 'Action not found.'})
             except (EngineError, ValueError, KeyError, TypeError) as exc:
                 self.respond(400, {'error': str(exc)})
     return Handler
@@ -199,7 +199,7 @@ def handler_for(app):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--port', type=int, default=8780)
-    parser.add_argument('--open', action='store_true', help='Abrir a interface no navegador padrão')
+    parser.add_argument('--open', action='store_true', help='Open the interface in the default browser')
     args = parser.parse_args()
     app = Application()
     server = ThreadingHTTPServer(('127.0.0.1', args.port), handler_for(app))

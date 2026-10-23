@@ -10,13 +10,13 @@ from PIL import Image
 class GlyphPreview:
     def __init__(self, workspace, original, expected_sha):
         if hashlib.sha256(original).hexdigest() != expected_sha:
-            raise ValueError('A imagem usada pela prévia não corresponde à fonte verificada.')
+            raise ValueError('The preview image does not match the verified source.')
         self.raw = original
         resources = Path(workspace) / 'AUDITORIA_ROM' / 'recursos_osd'
         meta = json.loads((resources / 'fontes.json').read_text(encoding='utf-8'))
         strings = json.loads((resources / 'osd_strings.json').read_text(encoding='utf-8'))
         if meta['rom_sha256'] != expected_sha or strings['rom_sha256'] != expected_sha:
-            raise ValueError('As fontes extraídas pertencem a outra imagem.')
+            raise ValueError('The extracted fonts belong to a different image.')
         self.fonts = meta['fonts']
         self.banks = meta['bank_map']
         self.records = {(lang['index'], rec['id']): rec
@@ -32,7 +32,7 @@ class GlyphPreview:
         glyph = font['glyphs'][mapping['glyph_base'] + value]
         start, end = int(glyph['start'], 16), int(glyph['end_exclusive'], 16)
         if not (int(font['start'], 16) <= start < end <= int(font['end_exclusive'], 16)):
-            raise ValueError('Glifo fora dos limites da fonte.')
+            raise ValueError('Glyph is outside the font bounds.')
         if not glyph['complete']:
             return Image.new('RGBA', (glyph['width'], font['height']), (255, 150, 30, 255))
         nibbles = [n for b in self.raw[start:end] for n in (b >> 4, b & 15)]
